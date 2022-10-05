@@ -22,6 +22,8 @@ io.on('connection', socket=>{
         socket.emit('message', formatMessage('Chatbot','Welcome to Chat App!'));     // message to user
         socket.broadcast.to(user.room).emit('message', formatMessage('Chatbot',`${user.username} joined the chat`));
 
+        // Send users and room information
+        io.to(user.room).emit('roomUsers', {room: user.room, users: getRoomUser(user.room)});
     })
 
 
@@ -38,7 +40,9 @@ io.on('connection', socket=>{
         if (user) {
             io.to(user.room).emit('message',formatMessage('Chatbot', `${user.username} has left the chat.`));     // message to everybody    
         }
-        
+        // Send users and room information
+        io.to(user.room).emit('roomUsers', {room: user.room, users: getRoomUser(user.room)});
+    
     });
 });
 
