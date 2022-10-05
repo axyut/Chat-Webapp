@@ -34,3 +34,8 @@ To get a local copy up and running follow these simple example steps.
 ```sh
    npm i
 ```
+4. Run with node or nodemon
+```sh
+   npm start
+   npm run dev
+```
